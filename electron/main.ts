@@ -1,10 +1,9 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
-import * as path from 'path'
 import * as url from 'url'
-import { isObject } from 'util';
+import * as path from 'path'
+import * as file from './file'
 
 let win: BrowserWindow
-let fs: any;
 
 app.on('ready', createWindow)
 
@@ -39,6 +38,9 @@ function createWindow() {
 }
 
 ipcMain.on('ping', (event, arg) => {
-    console.log('RECEIVED PING FROM ANGULAR APP', event, arg);
+    console.log('RECEIVED PING FROM ANGULAR APP', arg);
     event.sender.send('pong', 'yeah yeah yeah');
+    file.readfile();
 });
+
+

@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var electron_1 = require("electron");
-var path = require("path");
 var url = require("url");
+var path = require("path");
+var file = require("./file");
 var win;
-var fs;
 electron_1.app.on('ready', createWindow);
 electron_1.app.on('activate', function () {
     if (win === null) {
@@ -30,7 +30,8 @@ function createWindow() {
     });
 }
 electron_1.ipcMain.on('ping', function (event, arg) {
-    console.log('RECEIVED PING FROM ANGULAR APP', event, arg);
+    console.log('RECEIVED PING FROM ANGULAR APP', arg);
     event.sender.send('pong', 'yeah yeah yeah');
+    file.readfile();
 });
 //# sourceMappingURL=main.js.map

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
+import { FileService } from './service/file.service';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,13 @@ import { ElectronService } from 'ngx-electron';
 export class AppComponent {
   title = 'angular-elec-process';
 
-  constructor(private _electronService: ElectronService) { }
+  constructor(private _electronService: ElectronService, private _fileService: FileService) { }
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.playPingPong();
+
 
     if (this._electronService.isElectronApp) {
       this._electronService.ipcRenderer.on('pong', (event, arg) => {

@@ -1,0 +1,35 @@
+{
+    "users": [{
+            "id": 1,
+            "usersname": "John"
+        },
+        {
+            "id": 2,
+            "usersname": "Annie Heathcote"
+        },
+        {
+            "id": 3,
+            "usersname": "Ericka"
+        },
+        {
+            "id": 4,
+            "usersname": "Bailee"
+        },
+        {
+            "id": 5,
+            "usersname": "akira"
+        },
+        {
+            "id": 6,
+            "usersname": "kanoomtom"
+        },
+        {
+            "id": 7,
+            "usersname": "cats"
+        },
+        {
+            "id": 8,
+            "usersname": "dogs"
+        }
+    ]
+}
