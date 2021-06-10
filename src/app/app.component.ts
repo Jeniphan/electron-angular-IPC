@@ -15,7 +15,7 @@ export class AppComponent {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    this.playPingPong();
+    // this.playPingPong();
 
 
     if (this._electronService.isElectronApp) {
@@ -30,10 +30,20 @@ export class AppComponent {
   }
 
 
-  public playPingPong() {
+  // public playPingPong() {
+  //   if (this._electronService.isElectronApp) {
+  //     this._electronService.ipcRenderer.send('ping', 'Hi');
+  //     console.log('Hi');
+  //   }
+  // }
+
+  goToSettingsWindow() {
+    console.log("ready");
+
     if (this._electronService.isElectronApp) {
-      let pong: string = this._electronService.ipcRenderer.sendSync('ping', 'Hi');
-      console.log(pong);
+      this._electronService.ipcRenderer.send('win', 'win');
+      console.log('Hi');
     }
+
   }
 }
