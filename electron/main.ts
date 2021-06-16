@@ -3,11 +3,13 @@ import * as url from 'url'
 import * as path from 'path'
 // import * as file from './file'
 import { fileSystem } from "./file"
+import { database } from "./db"
 
 
 let win: BrowserWindow
 let childWindow: BrowserWindow;
 const _fileSystem = new fileSystem()
+const _database = new database()
 
 
 app.on('ready', createWindow)
@@ -80,9 +82,11 @@ function createchildWindow() {
 ipcMain.on('allTasks', (event, arg) => {
     console.log('RECEIVED PING FROM HTML APP', arg);
 
-    const res = _fileSystem.allTask()
-    event.sender.send('resAlltasks', res);
+    // const res = _fileSystem.allTask()
+    // event.sender.send('resAlltasks', res);
     // childWindow.close();
+    _database.allfile();
+
 });
 
 ipcMain.on('win', (event, arg) => {
