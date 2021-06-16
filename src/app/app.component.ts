@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
 import { FileService } from './service/file.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-root',
@@ -13,20 +15,14 @@ export class AppComponent {
   constructor(private _electronService: ElectronService, private _fileService: FileService) { }
 
   ngOnInit(): void {
+
+    this._electronService.ipcRenderer.on('resAlltasks', (error, arg) => {
+      console.log(typeof arg);
+    })
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     // this.playPingPong();
-
-
-    if (this._electronService.isElectronApp) {
-      this._electronService.ipcRenderer.on('pong', (event, arg) => {
-        console.log(
-          'RECEIVED RESPONSE FROM ELECTRON TO ANGULAR APP',
-          event,
-          arg
-        );
-      });
-    }
+    this.goToSettingsWindow()
   }
 
 
@@ -39,11 +35,7 @@ export class AppComponent {
 
   goToSettingsWindow() {
     console.log("ready");
-
-    if (this._electronService.isElectronApp) {
-      this._electronService.ipcRenderer.send('win', 'win');
-      console.log('Hi');
-    }
+    this._electronService.ipcRenderer.send('allTasks', 'win');
 
   }
 }

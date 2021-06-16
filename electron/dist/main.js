@@ -3,8 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var electron_1 = require("electron");
 var url = require("url");
 var path = require("path");
+// import * as file from './file'
+var file_1 = require("./file");
 var win;
 var childWindow;
+var _fileSystem = new file_1.fileSystem();
 electron_1.app.on('ready', createWindow);
 electron_1.app.on('activate', function () {
     if (win === null) {
@@ -42,7 +45,7 @@ function createchildWindow() {
         },
     });
     childWindow.loadURL(url.format({
-        pathname: path.join(__dirname, "/../../cil/app.html"),
+        pathname: path.join(__dirname, "/../../childwindow/app.html"),
         protocol: 'file:',
         slashes: true,
     }));
@@ -54,16 +57,16 @@ function createchildWindow() {
         childWindow = null;
     });
 }
-electron_1.ipcMain.on('closed', function (event, arg) {
+electron_1.ipcMain.on('allTasks', function (event, arg) {
     console.log('RECEIVED PING FROM HTML APP', arg);
-    // event.sender.send('pong', 'yeah yeah yeah');
-    // file.readfile();
-    childWindow.close();
+    var res = _fileSystem.allTask();
+    event.sender.send('resAlltasks', res);
+    // childWindow.close();
 });
 electron_1.ipcMain.on('win', function (event, arg) {
     console.log(arg);
     console.log('RECEIVED PING FROM ANGULAR APP', arg);
     // event.sender.send('pong', 'yeah');
-    createchildWindow();
+    //     createchildWindow();
 });
 //# sourceMappingURL=main.js.map

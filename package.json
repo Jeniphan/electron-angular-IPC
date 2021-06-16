@@ -9,7 +9,8 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "electron": "ng build --base-href ./ && tsc --p electron && electron ."
+        "electron": "ng build --base-href ./ && tsc --p electron && electron .",
+        "rebuild": "electron-rebuild -f -w sqlite3"
     },
     "private": true,
     "dependencies": {
@@ -21,8 +22,13 @@
         "@angular/platform-browser": "~11.2.14",
         "@angular/platform-browser-dynamic": "~11.2.14",
         "@angular/router": "~11.2.14",
+        "electron-alert": "^0.1.11",
+        "electron-rebuild": "^2.3.5",
         "ngx-electron": "^2.2.0",
+        "node-gyp": "^7.1.2",
         "rxjs": "~6.6.0",
+        "sequelize": "^6.6.2",
+        "sweetalert2": "^11.0.16",
         "tslib": "^2.0.0",
         "zone.js": "~0.11.3"
     },
@@ -43,6 +49,7 @@
         "karma-jasmine": "~4.0.0",
         "karma-jasmine-html-reporter": "~1.5.0",
         "protractor": "~7.0.0",
+        "sqlite3": "^5.0.2",
         "ts-node": "~8.3.0",
         "tslint": "~6.1.0",
         "typescript": "~4.1.5"

@@ -1,11 +1,14 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
 import * as url from 'url'
 import * as path from 'path'
-import * as file from './file'
-import { create } from 'domain'
+// import * as file from './file'
+import { fileSystem } from "./file"
+
 
 let win: BrowserWindow
 let childWindow: BrowserWindow;
+const _fileSystem = new fileSystem()
+
 
 app.on('ready', createWindow)
 
@@ -74,18 +77,19 @@ function createchildWindow() {
 
 }
 
-ipcMain.on('closed', (event, arg) => {
+ipcMain.on('allTasks', (event, arg) => {
     console.log('RECEIVED PING FROM HTML APP', arg);
-    // event.sender.send('pong', 'yeah yeah yeah');
-    // file.readfile();
-    childWindow.close();
+
+    const res = _fileSystem.allTask()
+    event.sender.send('resAlltasks', res);
+    // childWindow.close();
 });
 
 ipcMain.on('win', (event, arg) => {
     console.log(arg)
     console.log('RECEIVED PING FROM ANGULAR APP', arg);
     // event.sender.send('pong', 'yeah');
-    createchildWindow();
+    //     createchildWindow();
 })
 
 
